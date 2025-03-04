@@ -7,16 +7,27 @@ import pandas as pd
 import mail_warning as utl
 import query_sql as qs
 
+def conexion():
+    bd = "DataBase"
+    usuario = "postgres"
+    password = "Miramar2025#"
+    host = "localhost"
+    port = "5433"
+
+    return bd, usuario, password, host, port 
+
 def actualiza():
+
+    basedatos, usuario, password, host, port = conexion()
 
     try:
         # Conexion con la base de datos PostgreSQL
         conn = psycopg2.connect(
-            dbname="DataBase",
-            user="postgres",
-            password="Miramar2025#",
-            host="localhost",
-            port="5433"
+            dbname=basedatos,
+            user=usuario,
+            password=password,
+            host=host,
+            port=port
         )
     except:
         return "Se produjo un error en la conexion con la BASE DE DATOS."
@@ -242,14 +253,16 @@ def insertarFila(recu, constr,  tipo_dcto, cc,  rut,  dcto, fecha, exento2, neto
         case "CONSTRUCTORA VYV LIMITADA": rut_const = '78901770-0'
         case "Constructora e Inmobiliaria VYV": rut_const = '76680204-4'
 
+    basedatos, usuario, password, host, port = conexion()
+
     try:
         # Conexion con la base de datos PostgreSQL
         conn = psycopg2.connect(
-            dbname="DataBase",
-            user="postgres",
-            password="Miramar2025#",
-            host="localhost",
-            port="5433"
+            dbname=basedatos,
+            user=usuario,
+            password=password,
+            host=host,
+            port=port
         )
 
         cur = conn.cursor()
@@ -312,14 +325,16 @@ def eliminarFila(constr, dcto, rut_proveedor, total, edificio):
         case "Constructora e Inmobiliaria VYV": rut_const = '76680204-4'
         case _: obs += "Seleccione una constructora que esta dentro de las opciones" 
 
+    basedatos, usuario, password, host, port = conexion()
+
     try:
         # Conexion con la base de datos PostgreSQL
         conn = psycopg2.connect(
-            dbname="DataBase",
-            user="postgres",
-            password="Miramar2025#",
-            host="localhost",
-            port="5433"
+            dbname=basedatos,
+            user=usuario,
+            password=password,
+            host=host,
+            port=port
         )
 
         cur = conn.cursor()
